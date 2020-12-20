@@ -1,14 +1,15 @@
 import logo from './logo.svg';
-import tw, { css } from 'twin.macro'
+import tw from 'twin.macro';
+import { Container } from './styles';
 
 import './App.css';
 
 const Button = tw.button`bg-black text-white`
 
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <Container className="App">
       <header className="App-header">
         <Button>test</Button>
         <img src={logo} className="App-logo" alt="logo" />
@@ -24,7 +25,7 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
+    </Container>
   );
 }
 
