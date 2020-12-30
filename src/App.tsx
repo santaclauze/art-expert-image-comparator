@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import tw from 'twin.macro';
 import { Container } from './styles';
+import ImageDragger from './components/ImageDragger';
+import ImageComparator from './components/ImageComparator';
 
 import './App.css';
 
@@ -9,23 +11,10 @@ const Button = tw.button`bg-black text-white`
 
 const App = () => {
   return (
-    <Container className="App">
-      <header className="App-header">
-        <Button>test</Button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </Container>
+    // <ImageDragger />
+      <div style={{ height: '100vh', width: '100vw', backgroundColor: 'darkgray', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <ImageComparator />
+      </div>
   );
 }
 
