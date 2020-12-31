@@ -37,7 +37,7 @@ export const Slider = styled.div.attrs<{pos: number }>(props => ({
     },
 }))`
   height: 100%;
-  width: 5px;
+  width: 1px;
   position: absolute;
   top: 0;
   background-color: red;

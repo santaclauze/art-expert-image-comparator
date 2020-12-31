@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useSlider} from 'react-use';
 import { Container, ContainerLower, ContainerCover, Slider } from './styles';
 import empty from '../../assets/aralLake-empty.jpeg';
@@ -15,13 +15,13 @@ const ImageComparator = () => {
     return (
         <Container ref={ref}>
             <ContainerLower>
-                <img src={empty} id="lower" />
+                <img src={empty} id="lower" alt="lower" />
             </ContainerLower>
             {/** @ts-ignore */}
             <Slider pos={value} />
             {/** @ts-ignore */}
             <ContainerCover pos={value}>
-                <img src={full} id="cover" />
+                <img src={full} id="cover" alt="cover" />
             </ContainerCover>
         </Container>
     );
