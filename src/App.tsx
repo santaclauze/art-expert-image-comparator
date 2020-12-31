@@ -1,4 +1,3 @@
-import tw from 'twin.macro';
 import ImageComparator from './components/ImageComparator';
 
 import './App.css';
