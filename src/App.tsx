@@ -12,7 +12,7 @@ const Button = tw.button`bg-black text-white`
 const App = () => {
   return (
     // <ImageDragger />
-      <div style={{ height: '100vh', width: '100vw', backgroundColor: 'darkgray', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ height: '100vh', width: '100vw', backgroundColor: 'darkgray', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 0, margin: 0 }}>
         <ImageComparator />
       </div>
   );
