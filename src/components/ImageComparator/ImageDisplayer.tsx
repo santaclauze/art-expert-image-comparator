@@ -7,7 +7,7 @@ interface Props {
 
 const ImageDisplayer = ({ previewUrl }: Props) => (
   previewUrl ? (
-      <img src={previewUrl} alt="image" />
+      <img src={previewUrl} alt="image-displayer-image" />
   ) : <DropContainer><p>Drag and drop image here...</p></DropContainer>
 );
 
