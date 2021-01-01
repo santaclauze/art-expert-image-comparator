@@ -1,27 +1,63 @@
-import React from 'react';
+// @ts-nocheck
+import React, {useState} from 'react';
 import {useSlider} from 'react-use';
-import { Container, ContainerLower, ContainerCover, Slider } from './styles';
-import empty from '../../assets/aralLake-empty.jpeg';
-import full from '../../assets/aralLake-full.jpeg';
+
+import {Container, ContainerLower, ContainerCover, Slider, DropContainer} from './styles';
 
 const ImageComparator = () => {
     const ref = React.useRef(null);
-    const { value } = useSlider(ref, {
-        onScrubStart: () => {
-            console.log('onScrubStop');
-        },
-    });
+    const { value } = useSlider(ref);
+    const[previewUrl1, setPreviewUrl1] = useState("");
+    const[previewUrl2, setPreviewUrl2] = useState("");
 
+    const handleFile = (file: any, number: number) => {
+        if(number === 1) {
+            setPreviewUrl1((URL.createObjectURL(file)))
+        }
+        if(number === 2) {
+            setPreviewUrl2((URL.createObjectURL(file)))
+        }
+    }
+
+    const handleOndragOver = (e: any) => {
+        e.preventDefault();
+    }
+    const handleOndrop1 = (e: any) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let imageFile = e.dataTransfer.files[0];
+        handleFile(imageFile, 1);
+    }
+
+    const handleOndrop2 = (e: any) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let imageFile = e.dataTransfer.files[0];
+        handleFile(imageFile, 2);
+    }
+
+    // @ts-ignore
     return (
         <Container ref={ref}>
-            <ContainerLower>
-                <img src={empty} id="lower" alt="lower" />
+            <ContainerLower
+                onDragOver = {handleOndragOver}
+                onDrop = {handleOndrop1}
+                id="lower"
+            >
+                { previewUrl1 ? <div className="image">
+                    <img src={previewUrl1} alt='image' />
+                </div> : <p>Drag and drop image here...</p>}
             </ContainerLower>
-            {/** @ts-ignore */}
-            <Slider pos={value} />
-            {/** @ts-ignore */}
-            <ContainerCover pos={value}>
-                <img src={full} id="cover" alt="cover" />
+            <Slider pos={value || 0.5} />
+            <ContainerCover
+                pos={value || 0.5}
+                onDragOver = {handleOndragOver}
+                onDrop = {handleOndrop2}
+                id="cover"
+            >
+                { previewUrl2 ? <div className="image">
+                    <img src={previewUrl2} alt='image' />
+                </div> : <p>Drag and drop image here...</p>}
             </ContainerCover>
         </Container>
     );

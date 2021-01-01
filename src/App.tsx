@@ -1,13 +1,13 @@
 import ImageComparator from './components/ImageComparator';
 
-import './App.css';
+import { MainContainer } from './styles';
 
 
 const App = () => {
   return (
-      <div style={{ height: '100vh', width: '100vw', backgroundColor: 'darkgray', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 0, margin: 0 }}>
-        <ImageComparator />
-      </div>
+      <MainContainer>
+          <ImageComparator />
+      </MainContainer>
   );
 }
 

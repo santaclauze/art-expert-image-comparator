@@ -5,6 +5,7 @@ export const Container = styled.div`
   height: 75vh;
   border: 1px solid grey;
   position: relative;
+  background-color: #666666;
   img {
     pointer-events: none;
     width: 75vw;
@@ -29,6 +30,19 @@ export const ContainerLower = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
+`;
+
+export const DropContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #282c34;
+  p {
+    margin: auto;
+  }
+  &#lower p {
+    margin-left: 65%;
+  }
 `;
 
 export const Slider = styled.div.attrs<{pos: number }>(props => ({
