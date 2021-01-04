@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSlider } from 'react-use';
 
 import {
-  Container, ContainerLower, ContainerCover, Slider, InitContainer,
+  Container, ContainerLower, ImagesContainer, ContainerCover, Slider, InitContainer,
 } from './styles';
 import ImageDisplayer from "./ImageDisplayer";
 import {FileHandler, HTMLInputEvent} from "../../types";
@@ -47,15 +47,15 @@ const ImageComparator = () => {
   }
 
   return (
-      <div>
+      <Container>
         <button onClick={handleReset}>Reset images</button>
-        <Container ref={ref}>
+        <ImagesContainer ref={ref}>
           {previewUrl1 ? (
-              <ContainerLower
-                  id="lower"
-              >
-                <ImageDisplayer previewUrl={previewUrl1} />
-              </ContainerLower>
+                <ContainerLower
+                    id="lower"
+                >
+                  <ImageDisplayer previewUrl={previewUrl1} />
+                </ContainerLower>
           ) : (
               <InitContainer
                   onDragOver={handleOndragOver}
@@ -82,8 +82,8 @@ const ImageComparator = () => {
                 <p>Drop both files that you wish to compare...</p>
               </InitContainer>
           )}
-        </Container>
-      </div>
+        </ImagesContainer>
+      </Container>
 
   );
 }
