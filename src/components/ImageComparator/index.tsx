@@ -41,41 +41,50 @@ const ImageComparator = () => {
     handleFile(imageFile, 2);
   };
 
+  const handleReset = () => {
+    setPreviewUrl1('');
+    setPreviewUrl2('');
+  }
+
   return (
-    <Container ref={ref}>
-      {previewUrl1 ? (
-          <ContainerLower
-              id="lower"
-          >
-            <ImageDisplayer previewUrl={previewUrl1} />
-          </ContainerLower>
-      ) : (
-          <InitContainer
-              onDragOver={handleOndragOver}
-              onDrop={handleOndrop1}
-          >
-            <input type="file" onChange={(file: File) => handleFile(file, 1)}/>
-            <p>Drop both files that you wish to compare...</p>
-          </InitContainer>
-      )}
-      <Slider pos={(previewUrl1 && previewUrl2) ? value : 0.5} />
-      {previewUrl2 ? (
-          <ContainerCover
-              pos={previewUrl1 && previewUrl2 ? value : 1}
-              id="cover"
-          >
-            <ImageDisplayer previewUrl={previewUrl2} />
-          </ContainerCover>
-      ) : (
-          <InitContainer
-              onDragOver={handleOndragOver}
-              onDrop={handleOndrop2}
-          >
-            <input type="file" onChange={(file: File) => handleFile(file, 2)}/>
-            <p>Drop both files that you wish to compare...</p>
-          </InitContainer>
-      )}
-    </Container>
+      <div>
+        <button onClick={handleReset}>Reset images</button>
+        <Container ref={ref}>
+          {previewUrl1 ? (
+              <ContainerLower
+                  id="lower"
+              >
+                <ImageDisplayer previewUrl={previewUrl1} />
+              </ContainerLower>
+          ) : (
+              <InitContainer
+                  onDragOver={handleOndragOver}
+                  onDrop={handleOndrop1}
+              >
+                <input type="file" onChange={(file: File) => handleFile(file, 1)}/>
+                <p>Drop both files that you wish to compare...</p>
+              </InitContainer>
+          )}
+          <Slider pos={(previewUrl1 && previewUrl2) ? value : 0.5} />
+          {previewUrl2 ? (
+              <ContainerCover
+                  pos={previewUrl1 && previewUrl2 ? value : 1}
+                  id="cover"
+              >
+                <ImageDisplayer previewUrl={previewUrl2} />
+              </ContainerCover>
+          ) : (
+              <InitContainer
+                  onDragOver={handleOndragOver}
+                  onDrop={handleOndrop2}
+              >
+                <input type="file" onChange={(file: File) => handleFile(file, 2)}/>
+                <p>Drop both files that you wish to compare...</p>
+              </InitContainer>
+          )}
+        </Container>
+      </div>
+
   );
 }
 
