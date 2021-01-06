@@ -1,12 +1,12 @@
 import React from 'react';
-import ImageComparator from './components/ImageComparator';
+import Comparator from './components/Comparator';
 
 import { MainContainer } from './styles';
 import ComparatorOptions from "./components/ComparatorOptions";
 
 const App = () => (
   <MainContainer>
-    <ImageComparator />
+    <Comparator />
     <ComparatorOptions />
   </MainContainer>
 );
