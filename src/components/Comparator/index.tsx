@@ -1,56 +1,22 @@
 // @ts-nocheck
-import React, { useState } from 'react';
-
+import React  from 'react';
 import {
     Container
 } from './styles';
-import {FileHandler, HTMLInputEvent} from "../../types";
 import Uploader from "./components/Uploader";
 import ImageComparator from "./components/ImageComparator";
+import {useReducerContext} from "../../reducers/toolsReducer";
 
 const Comparator = () => {
-    const [imageCover, setImageCover] = useState<{ imageCover: string }>('');
-    const [imageLower, setImageLower] = useState<{ imageLower: string }>('');
+    const { state: { isReadyToCompare } } = useReducerContext();
 
-    const handleFile = (files: FileHandler[]) => {
-        setImageCover(URL.createObjectURL(files[0]))
-        setImageLower(URL.createObjectURL(files[1]))
-    };
-
-    const handleOnDragOver = (e: HTMLInputEvent) => {
-        e.preventDefault();
-    };
-
-    const handleOndrop = (e: HTMLInputEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const imageFiles = e.dataTransfer.files;
-        handleFile(imageFiles);
-    };
-
-    // const handleReset = () => {
-    //   setPreviewUrl1('');
-    //   setPreviewUrl2('');
-    // }
-
-    const isComparatorReady = imageCover && imageLower;
-    console.log(isComparatorReady)
     return (
         <Container>
-            {isComparatorReady ? (
-                <ImageComparator
-                    imageLower={imageLower}
-                    imageCover={imageCover}
-                    isComparatorReady={isComparatorReady}
-                />
+            {isReadyToCompare ? (
+                <ImageComparator />
             ) : (
-                <Uploader
-                    handleOnDragOver={handleOnDragOver}
-                    handleOnDrop={handleOndrop}
-                    handleUploadedFiles={handleFile}
-                />
+                <Uploader />
             )}
-            {/*<button onClick={handleReset}>Reset images</button>*/}
         </Container>
 
     );

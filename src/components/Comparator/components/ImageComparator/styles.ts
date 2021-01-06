@@ -16,9 +16,9 @@ export const ImagesContainer = styled.div`
   }
 `;
 
-export const ContainerCover = styled.div.attrs<{pos: number }>(props => ({
+export const ContainerCover = styled.div.attrs<{pos: number, isVertical: boolean }>(props => ({
     style: {
-        width: `${props.pos * 100}%`,
+        ...props.isVertical ? { height: `${props.pos * 100}%` } : { width: `${props.pos * 100}%` },
     },
 }))`
   overflow: hidden;
@@ -44,15 +44,22 @@ export const DropContainer = styled.div`
   justify-content: center;
 `;
 
-export const Slider = styled.div.attrs<{pos: number }>(props => ({
+export const Slider = styled.div.attrs<{pos: number, isVertical: boolean }>(props => ({
     style: {
-        left: `${props.pos * 100}%`,
+        ...props.isVertical ? {
+            top: `${props.pos * 100}%`,
+            width: '100%',
+            left: 0,
+            height: '1px',
+        } : {
+            left: `${props.pos * 100}%`,
+            height: '100%',
+            top: 0,
+            width: '1px',
+        },
     },
 }))`
-  height: 100%;
-  width: 1px;
   position: absolute;
-  top: 0;
   background-color: red;
   z-index: 100;
 `;
