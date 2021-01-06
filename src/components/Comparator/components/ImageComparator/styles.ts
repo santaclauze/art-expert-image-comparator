@@ -7,12 +7,13 @@ export const ImagesContainer = styled.div`
   position: relative;
   background-color: #666666;
   display: flex;
-  img {
+  div.displayed-image {
     pointer-events: none;
     width: 75vw;
     height: 75vh;
     display:block;
     vertical-align:middle;
+    background-size: 100%;
   }
 `;
 

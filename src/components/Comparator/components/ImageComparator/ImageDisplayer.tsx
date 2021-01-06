@@ -3,11 +3,12 @@ import { DropContainer } from './styles';
 
 interface Props {
     previewUrl: string;
+    scale: number;
 }
 
-const ImageDisplayer = ({ previewUrl }: Props) => (
+const ImageDisplayer = ({ previewUrl, scale }: Props) => (
   previewUrl ? (
-      <img src={previewUrl} alt="displayer-preview" />
+      <div className="displayed-image" style={{ backgroundImage: `url(${previewUrl})`, transform: `scale(${scale})` }} />
   ) : <DropContainer><p>Drag and drop image here...</p></DropContainer>
 );
 

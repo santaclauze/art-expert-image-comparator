@@ -6,6 +6,7 @@ export interface ToolsState {
     mode: string;
     images: any[];
     isReadyToCompare: boolean;
+    scale: number;
 }
 
 // action types
@@ -13,6 +14,8 @@ export enum ActionType {
     UPDATE_MODE,
     UPLOAD_IMAGES,
     SWAP_IMAGES,
+    SET_SCALE,
+    RESET_IMAGES_SETTINGS
 }
 
 // action type
@@ -34,14 +37,23 @@ interface ISwapImagesAction {
     type: ActionType.SWAP_IMAGES;
 }
 
+interface ISetScaleAction {
+    type: ActionType.SET_SCALE;
+}
 
-type ToolsAction = IUpdateModeAction | ISwapImagesAction | IUploadImagesAction;
+interface ResetImageSettings {
+    type: ActionType.RESET_IMAGES_SETTINGS;
+}
+
+
+type ToolsAction = IUpdateModeAction | ResetImageSettings | ISetScaleAction | ISwapImagesAction | IUploadImagesAction;
 
 // initial state
 export const initialState: ToolsState = {
     mode: 'sliderY',
     images: [],
     isReadyToCompare: false,
+    scale: 1,
 };
 
 // reducer
@@ -69,6 +81,18 @@ export const reducer = (
         return {
             ...state,
             images: state.images.reverse(),
+        };
+    }
+    if (action.type === ActionType.SET_SCALE) {
+        return {
+            ...state,
+            scale: state.scale + 1,
+        };
+    }
+    if (action.type === ActionType.RESET_IMAGES_SETTINGS) {
+        return {
+            ...state,
+            scale: 1,
         };
     }
     return state;

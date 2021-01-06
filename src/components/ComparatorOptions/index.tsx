@@ -13,18 +13,29 @@ const ComparatorOptions = () => {
         dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: 'sliderX' }})
     }
 
-    const handleReset = () => {
+    const handleResetImages = () => {
         dispatch({ type: ActionType.UPLOAD_IMAGES, payload: { images: [] }})
     }
 
     const handleSwap = () => {
         dispatch({ type: ActionType.SWAP_IMAGES });
     }
+
+    const handleZoom = () => {
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: 'zoom' } });
+    }
+
+    const handleResetSettings = () => {
+        dispatch({ type: ActionType.RESET_IMAGES_SETTINGS });
+    }
+
     return (
         <Container>
             <button onClick={handleSliderY}>SliderY</button>
             <button onClick={handleSliderX}>SliderX</button>
-            <button onClick={handleReset}>ResetImages</button>
+            <button onClick={handleZoom}>Zoom</button>
+            <button onClick={handleResetImages}>Reset Images</button>
+            <button onClick={handleResetSettings}>Reset Settings</button>
             <button onClick={handleSwap}>handle swap</button>
         </Container>
     );
