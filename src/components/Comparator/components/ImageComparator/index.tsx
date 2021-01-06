@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import { useSlider } from 'react-use';
 
 import {
-  Container, ContainerLower, ImagesContainer, ContainerCover, Slider, InitContainer,
+    ContainerLower, ImagesContainer, ContainerCover, Slider,
 } from './styles';
 import ImageDisplayer from "./ImageDisplayer";
 import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
@@ -26,7 +26,7 @@ const ImageComparator = () => {
       if(mode === 'zoom') {
           setSavedSliderValue(value)
       }
-    }, [mode])
+    }, [mode, value])
 
     const makePosition = (defaultValue: number) => {
       if (mode === 'zoom') {
