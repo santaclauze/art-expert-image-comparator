@@ -1,20 +1,23 @@
 import React from 'react';
-import Comparator from './components/Comparator';
+import {
+    BrowserRouter as Router,
+    Route,
+} from "react-router-dom";
 
-import { MainContainer } from './styles';
-import ComparatorOptions from "./components/ComparatorOptions";
-import { ReducerContext, useReducer } from './reducers/toolsReducer';
+import ComparatorView from "./views/ComparatorView";
+import LoginView from "./views/LoginView";
 
 const App = () =>  {
-    const [state, dispatch] = useReducer();
 
     return (
-        <ReducerContext.Provider value={{ state, dispatch }}>
-            <MainContainer>
-                <Comparator />
-                <ComparatorOptions />
-            </MainContainer>
-        </ReducerContext.Provider>
+        <Router>
+            <Route exact path="/">
+                <LoginView />
+            </Route>
+            <Route exact path="/comparator">
+                <ComparatorView />
+            </Route>
+        </Router>
     );
 }
 
