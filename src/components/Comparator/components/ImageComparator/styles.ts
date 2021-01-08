@@ -7,7 +7,7 @@ export const ImagesContainer = styled.div`
   position: relative;
   background-color: #666666;
   display: flex;
-  div.displayed-image {
+  div#displayed-image-1, div#displayed-image-2 {
     width: 75vw;
     height: 75vh;
     display:block;
@@ -61,17 +61,5 @@ export const Slider = styled.div.attrs<{pos: number, isVertical: boolean }>(prop
     },
 }))`
   position: absolute;
-  background-color: red;
   z-index: 100;
-`;
-
-export const InitContainer = styled.div`
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: purple;
-  z-index: 90;
 `;

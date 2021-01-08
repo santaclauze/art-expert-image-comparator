@@ -23,10 +23,12 @@ const ImageComparator = () => {
     };
 
     useEffect(() => {
-      if(mode === 'zoom') {
+      if(mode === 'zoom' || mode === 'drag') {
+          console.log(mode, value)
           setSavedSliderValue(value)
+          console.log(savedSliderValue)
       }
-    }, [mode, value])
+    }, [mode])
 
     const makePosition = (defaultValue: number) => {
       if (mode === 'zoom' || mode === 'drag') {
@@ -43,7 +45,7 @@ const ImageComparator = () => {
         <ContainerLower
             id="lower"
         >
-          <ImageDisplayer previewUrl={images[0]} scale={scale} />
+          <ImageDisplayer previewUrl={images[0]} index={1} scale={scale} />
         </ContainerLower>
         <Slider pos={makePosition(0.5)} isVertical={isVertical} />
         <ContainerCover
@@ -51,7 +53,7 @@ const ImageComparator = () => {
             isVertical={isVertical}
             id="cover"
         >
-          <ImageDisplayer previewUrl={images[1]} scale={scale} />
+          <ImageDisplayer previewUrl={images[1]} index={2} scale={scale} />
         </ContainerCover>
       </ImagesContainer>
   );
