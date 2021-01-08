@@ -19,7 +19,7 @@ const ImageComparator = () => {
       if(mode !== 'zoom') {
           return;
       }
-        dispatch({ type: ActionType.SET_SCALE });
+      dispatch({ type: ActionType.INCREASE_ZOOM });
     };
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const ImageComparator = () => {
     }, [mode, value])
 
     const makePosition = (defaultValue: number) => {
-      if (mode === 'zoom') {
+      if (mode === 'zoom' || mode === 'drag') {
           return savedSliderValue;
       }
       if (isReadyToCompare) {

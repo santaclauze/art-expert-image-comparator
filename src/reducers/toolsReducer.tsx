@@ -6,7 +6,7 @@ export interface ToolsState {
     mode: string;
     images: any[];
     isReadyToCompare: boolean;
-    scale: number;
+    zoomRatio: number;
 }
 
 // action types
@@ -14,7 +14,7 @@ export enum ActionType {
     UPDATE_MODE,
     UPLOAD_IMAGES,
     SWAP_IMAGES,
-    SET_SCALE,
+    INCREASE_ZOOM,
     RESET_IMAGES_SETTINGS
 }
 
@@ -38,7 +38,7 @@ interface ISwapImagesAction {
 }
 
 interface ISetScaleAction {
-    type: ActionType.SET_SCALE;
+    type: ActionType.INCREASE_ZOOM;
 }
 
 interface ResetImageSettings {
@@ -53,7 +53,7 @@ export const initialState: ToolsState = {
     mode: 'sliderY',
     images: [],
     isReadyToCompare: false,
-    scale: 1,
+    zoomRatio: 1,
 };
 
 // reducer
@@ -83,16 +83,17 @@ export const reducer = (
             images: state.images.reverse(),
         };
     }
-    if (action.type === ActionType.SET_SCALE) {
+    if (action.type === ActionType.INCREASE_ZOOM) {
         return {
             ...state,
-            scale: state.scale + 1,
+            zoomRatio: state.zoomRatio + 1,
         };
     }
     if (action.type === ActionType.RESET_IMAGES_SETTINGS) {
         return {
             ...state,
-            scale: 1,
+            mode: 'sliderY',
+            zoomRatio: 1,
         };
     }
     return state;

@@ -29,6 +29,10 @@ const ComparatorOptions = () => {
         dispatch({ type: ActionType.RESET_IMAGES_SETTINGS });
     }
 
+    const handleDrag = () => {
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: 'drag' } });
+    }
+
     return (
         <Container>
             <button onClick={handleSliderY}>SliderY</button>
@@ -37,6 +41,7 @@ const ComparatorOptions = () => {
             <button onClick={handleResetImages}>Reset Images</button>
             <button onClick={handleResetSettings}>Reset Settings</button>
             <button onClick={handleSwap}>handle swap</button>
+            <button onClick={handleDrag}>handle drag</button>
         </Container>
     );
 };

@@ -8,12 +8,12 @@ export const ImagesContainer = styled.div`
   background-color: #666666;
   display: flex;
   div.displayed-image {
-    pointer-events: none;
     width: 75vw;
     height: 75vh;
     display:block;
     vertical-align:middle;
-    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
 `;
 
