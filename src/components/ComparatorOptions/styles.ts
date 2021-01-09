@@ -9,7 +9,3 @@ export const Container = styled.div`
   background-color: #2f2f2f;
   margin-left: auto;
 `;
-
-export const Hr = styled.hr`
-  width: 100%;
-`;

@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {Container, Hr} from './styles';
+import {Container} from './styles';
 import {ActionType, useReducerContext} from "../../reducers/toolsReducer";
 import { Mode} from "../../types";
 
@@ -47,7 +47,6 @@ const ComparatorOptions = () => {
             <button onClick={handleResetSettings}>Reset Settings</button>
             <button onClick={handleSwap}>handle swap</button>
             <button onClick={handleDrag}>handle drag</button>
-            <Hr />
             {mode === Mode.ZOOM &&
                 <input
                     onChange={handleZoomChange}

@@ -8,6 +8,7 @@ export interface ToolsState {
     images: any[];
     isReadyToCompare: boolean;
     scaleValue: string;
+    backgroundPositions: { x: number, y: number };
 }
 
 // action types
@@ -16,7 +17,8 @@ export enum ActionType {
     UPLOAD_IMAGES,
     SWAP_IMAGES,
     SET_SCALE_VALUE,
-    RESET_IMAGES_SETTINGS
+    RESET_IMAGES_SETTINGS,
+    SET_BACKGROUND_POSITIONS,
 }
 
 // action type
@@ -44,12 +46,20 @@ interface SetScaleValueAction {
         scaleValue: string;
     };
 }
+
+interface SetBackgroundPositions {
+    type: ActionType.SET_BACKGROUND_POSITIONS;
+    payload: {
+        backgroundPositions: { x: number, y: number };
+    };
+}
+
 interface ResetImageSettings {
     type: ActionType.RESET_IMAGES_SETTINGS;
 }
 
 
-type ToolsAction = SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
+type ToolsAction = SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
 
 // initial state
 export const initialState: ToolsState = {
@@ -57,6 +67,7 @@ export const initialState: ToolsState = {
     images: [],
     isReadyToCompare: false,
     scaleValue: '1',
+    backgroundPositions: { x: 0, y : 0 },
 };
 
 // reducer
@@ -91,6 +102,13 @@ export const reducer = (
         return {
             ...state,
             scaleValue: payload.scaleValue,
+        };
+    }
+    if (action.type === ActionType.SET_BACKGROUND_POSITIONS) {
+        const { payload } = action;
+        return {
+            ...state,
+            backgroundPositions: payload.backgroundPositions,
         };
     }
     if (action.type === ActionType.RESET_IMAGES_SETTINGS) {
