@@ -13,3 +13,7 @@ export const Button = styled.button`
   height: fit-content;
   ${tw`inline-block px-6 py-2 rounded-full text-xs font-medium leading-6 text-center text-white transition bg-indigo-500 rounded hover:shadow-lg hover:bg-indigo-600`}
 `;
+
+export const Heading = styled.h3`
+  ${tw`text-white`}
+`;

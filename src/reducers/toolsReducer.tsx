@@ -10,6 +10,10 @@ export interface ToolsState {
     scaleValue: string;
     backgroundPositions: { x: number, y: number };
     cursorStyle: Cursors;
+    sliderStyles: {
+        width: string;
+        color: string;
+    }
 }
 
 // action types
@@ -21,6 +25,7 @@ export enum ActionType {
     RESET_IMAGES_SETTINGS,
     SET_BACKGROUND_POSITIONS,
     SET_CURSOR_STYLE,
+    SET_SLIDER_STYLES,
 }
 
 // action type
@@ -56,6 +61,13 @@ interface SetBackgroundPositions {
     };
 }
 
+interface SetSliderStyles {
+    type: ActionType.SET_SLIDER_STYLES;
+    payload: {
+        sliderStyles: { width?: string, color?: string };
+    };
+}
+
 interface SetCursorStyle {
     type: ActionType.SET_CURSOR_STYLE;
     payload: {
@@ -68,7 +80,7 @@ interface ResetImageSettings {
 }
 
 
-type ToolsAction = SetCursorStyle | SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
+type ToolsAction = SetSliderStyles | SetCursorStyle | SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
 
 // initial state
 export const initialState: ToolsState = {
@@ -78,6 +90,10 @@ export const initialState: ToolsState = {
     scaleValue: '1',
     backgroundPositions: { x: 0, y : 0 },
     cursorStyle: Cursors.DEFAULT,
+    sliderStyles: {
+        width: '1',
+        color: 'black',
+    }
 };
 
 // reducer
@@ -126,6 +142,16 @@ export const reducer = (
         return {
             ...state,
             cursorStyle: payload.cursorStyle,
+        };
+    }
+    if (action.type === ActionType.SET_SLIDER_STYLES) {
+        const { payload } = action;
+        return {
+            ...state,
+            sliderStyles: {
+                ...state.sliderStyles,
+                ...payload.sliderStyles
+            },
         };
     }
     if (action.type === ActionType.RESET_IMAGES_SETTINGS) {
