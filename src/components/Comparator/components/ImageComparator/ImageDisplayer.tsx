@@ -2,7 +2,6 @@ import React from 'react';
 import { DropContainer } from './styles';
 import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
 import {useKey} from 'react-use';
-import {Mode} from "../../../../types";
 
 interface Props {
     previewUrl: string;
@@ -10,7 +9,7 @@ interface Props {
 }
 
 const ImageDisplayer = ({ previewUrl, index }: Props) => {
-    const { dispatch, state: { scaleValue, backgroundPositions, repositionImage1, mode } } = useReducerContext();
+    const { dispatch, state: { scaleValue, backgroundPositions, repositionImage1 } } = useReducerContext();
 
 
     const moveUp = () =>
