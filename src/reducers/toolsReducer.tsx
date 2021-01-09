@@ -177,6 +177,8 @@ export const reducer = (
             mode: Mode.SLIDER_Y,
             scaleValue: '1',
             cursorStyle: Cursors.DEFAULT,
+            backgroundPositions: { x: 0, y : 0 },
+            repositionImage1: { x: 0, y : 0 },
         };
     }
     return state;
