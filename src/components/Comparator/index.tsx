@@ -8,10 +8,10 @@ import ImageComparator from "./components/ImageComparator";
 import {useReducerContext} from "../../reducers/toolsReducer";
 
 const Comparator = () => {
-    const { state: { isReadyToCompare } } = useReducerContext();
+    const { state: { isReadyToCompare, cursorStyle } } = useReducerContext();
 
     return (
-        <Container>
+        <Container cursor={cursorStyle}>
             {isReadyToCompare ? (
                 <ImageComparator />
             ) : (

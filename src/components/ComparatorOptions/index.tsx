@@ -1,17 +1,21 @@
 import React, {ChangeEvent} from 'react';
-import {Container} from './styles';
+import { Button, Container } from './styles';
 import {ActionType, useReducerContext} from "../../reducers/toolsReducer";
-import { Mode} from "../../types";
+import { Cursors, Mode } from "../../types";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsAlt, faArrowsAltV, faArrowsAltH, faSearch, faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 
 const ComparatorOptions = () => {
     const { dispatch, state: { mode , scaleValue } } = useReducerContext();
 
     const handleSliderY = () => {
         dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.SLIDER_Y }})
+        dispatch({ type: ActionType.SET_CURSOR_STYLE, payload: { cursorStyle: Cursors.SLIDER_Y }})
     }
 
     const handleSliderX= () => {
         dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.SLIDER_X }})
+        dispatch({ type: ActionType.SET_CURSOR_STYLE, payload: { cursorStyle: Cursors.SLIDER_X }})
     }
 
     const handleResetImages = () => {
@@ -40,13 +44,13 @@ const ComparatorOptions = () => {
 
     return (
         <Container>
-            <button onClick={handleSliderY}>SliderY</button>
-            <button onClick={handleSliderX}>SliderX</button>
-            <button onClick={handleZoom}>Zoom</button>
-            <button onClick={handleResetImages}>Reset Images</button>
-            <button onClick={handleResetSettings}>Reset Settings</button>
-            <button onClick={handleSwap}>handle swap</button>
-            <button onClick={handleDrag}>handle drag</button>
+            <Button onClick={handleSliderY}><FontAwesomeIcon icon={faArrowsAltH} /></Button>
+            <Button onClick={handleSliderX}><FontAwesomeIcon icon={faArrowsAltV} /></Button>
+            <Button onClick={handleZoom}><FontAwesomeIcon icon={faSearch} /></Button>
+            <Button onClick={handleSwap}><FontAwesomeIcon icon={faExchangeAlt} /></Button>
+            <Button onClick={handleDrag}><FontAwesomeIcon icon={faArrowsAlt} /></Button>
+            <Button onClick={handleResetImages}>Clear</Button>
+            <Button onClick={handleResetSettings}>Reset Settings</Button>
             {mode === Mode.ZOOM &&
                 <input
                     onChange={handleZoomChange}

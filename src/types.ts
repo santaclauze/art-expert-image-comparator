@@ -10,3 +10,11 @@ export enum Mode {
     SLIDER_Y = 'SLIDER_Y',
     ZOOM = 'ZOOM',
 }
+
+export enum Cursors {
+    DEFAULT = 'default',
+    DRAG = 'move',
+    SLIDER_X = 'row-resize',
+    SLIDER_Y = 'col-resize',
+    ZOOM = 'ZOOM',
+}

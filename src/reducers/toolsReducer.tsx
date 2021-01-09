@@ -1,6 +1,6 @@
 import React, {Dispatch, useContext, useReducer as useReactReducer} from 'react';
 import identity from 'lodash/identity';
-import {Mode} from "../types";
+import {Cursors, Mode} from "../types";
 
 // state type
 export interface ToolsState {
@@ -9,6 +9,7 @@ export interface ToolsState {
     isReadyToCompare: boolean;
     scaleValue: string;
     backgroundPositions: { x: number, y: number };
+    cursorStyle: Cursors;
 }
 
 // action types
@@ -19,6 +20,7 @@ export enum ActionType {
     SET_SCALE_VALUE,
     RESET_IMAGES_SETTINGS,
     SET_BACKGROUND_POSITIONS,
+    SET_CURSOR_STYLE,
 }
 
 // action type
@@ -54,12 +56,19 @@ interface SetBackgroundPositions {
     };
 }
 
+interface SetCursorStyle {
+    type: ActionType.SET_CURSOR_STYLE;
+    payload: {
+        cursorStyle: ToolsState['cursorStyle'];
+    };
+}
+
 interface ResetImageSettings {
     type: ActionType.RESET_IMAGES_SETTINGS;
 }
 
 
-type ToolsAction = SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
+type ToolsAction = SetCursorStyle | SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
 
 // initial state
 export const initialState: ToolsState = {
@@ -68,6 +77,7 @@ export const initialState: ToolsState = {
     isReadyToCompare: false,
     scaleValue: '1',
     backgroundPositions: { x: 0, y : 0 },
+    cursorStyle: Cursors.DEFAULT,
 };
 
 // reducer
@@ -111,11 +121,19 @@ export const reducer = (
             backgroundPositions: payload.backgroundPositions,
         };
     }
+    if (action.type === ActionType.SET_CURSOR_STYLE) {
+        const { payload } = action;
+        return {
+            ...state,
+            cursorStyle: payload.cursorStyle,
+        };
+    }
     if (action.type === ActionType.RESET_IMAGES_SETTINGS) {
         return {
             ...state,
             mode: Mode.SLIDER_Y,
             scaleValue: '1',
+            cursorStyle: Cursors.DEFAULT,
         };
     }
     return state;

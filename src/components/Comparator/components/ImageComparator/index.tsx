@@ -28,7 +28,7 @@ const ImageComparator = () => {
       if(mode === 'zoom' || mode === 'drag') {
           setSavedSliderValue(value)
       }
-    }, [mode])
+    }, [mode, value])
 
     const makePosition = (defaultValue: number) => {
       if (mode === 'zoom' || mode === 'drag') {
