@@ -7,14 +7,16 @@ import {
 } from './styles';
 import ImageDisplayer from "./ImageDisplayer";
 import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
+import {Mode} from "../../../../types";
 
 const ImageComparator = () => {
-    const { dispatch, state: { images, isReadyToCompare, mode, scale } } = useReducerContext();
+    const { dispatch, state: { images, isReadyToCompare, mode } } = useReducerContext();
     const ref = React.useRef(null);
-    const isVertical = mode ===  'sliderX';
+
+    const isVertical = mode === Mode.SLIDER_X;
+
     const { value } = useSlider(ref, { vertical: isVertical });
     const [savedSliderValue, setSavedSliderValue] = useState();
-
     const handleClick = () => {
       if(mode !== 'zoom') {
           return;
@@ -24,9 +26,7 @@ const ImageComparator = () => {
 
     useEffect(() => {
       if(mode === 'zoom' || mode === 'drag') {
-          console.log(mode, value)
           setSavedSliderValue(value)
-          console.log(savedSliderValue)
       }
     }, [mode])
 
@@ -45,7 +45,7 @@ const ImageComparator = () => {
         <ContainerLower
             id="lower"
         >
-          <ImageDisplayer previewUrl={images[0]} index={1} scale={scale} />
+          <ImageDisplayer previewUrl={images[0]} index={1} />
         </ContainerLower>
         <Slider pos={makePosition(0.5)} isVertical={isVertical} />
         <ContainerCover
@@ -53,7 +53,7 @@ const ImageComparator = () => {
             isVertical={isVertical}
             id="cover"
         >
-          <ImageDisplayer previewUrl={images[1]} index={2} scale={scale} />
+          <ImageDisplayer previewUrl={images[1]} index={2} />
         </ContainerCover>
       </ImagesContainer>
   );

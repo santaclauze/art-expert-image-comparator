@@ -1,12 +1,13 @@
 import React, {Dispatch, useContext, useReducer as useReactReducer} from 'react';
 import identity from 'lodash/identity';
+import {Mode} from "../types";
 
 // state type
 export interface ToolsState {
-    mode: string;
+    mode: Mode;
     images: any[];
     isReadyToCompare: boolean;
-    zoomRatio: number;
+    scaleValue: string;
 }
 
 // action types
@@ -14,7 +15,7 @@ export enum ActionType {
     UPDATE_MODE,
     UPLOAD_IMAGES,
     SWAP_IMAGES,
-    INCREASE_ZOOM,
+    SET_SCALE_VALUE,
     RESET_IMAGES_SETTINGS
 }
 
@@ -22,7 +23,7 @@ export enum ActionType {
 interface IUpdateModeAction {
     type: ActionType.UPDATE_MODE;
     payload: {
-        mode: string;
+        mode: Mode;
     };
 }
 
@@ -37,23 +38,25 @@ interface ISwapImagesAction {
     type: ActionType.SWAP_IMAGES;
 }
 
-interface ISetScaleAction {
-    type: ActionType.INCREASE_ZOOM;
+interface SetScaleValueAction {
+    type: ActionType.SET_SCALE_VALUE;
+    payload: {
+        scaleValue: string;
+    };
 }
-
 interface ResetImageSettings {
     type: ActionType.RESET_IMAGES_SETTINGS;
 }
 
 
-type ToolsAction = IUpdateModeAction | ResetImageSettings | ISetScaleAction | ISwapImagesAction | IUploadImagesAction;
+type ToolsAction = SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
 
 // initial state
 export const initialState: ToolsState = {
-    mode: 'sliderY',
+    mode: Mode.SLIDER_Y,
     images: [],
     isReadyToCompare: false,
-    zoomRatio: 1,
+    scaleValue: '1',
 };
 
 // reducer
@@ -83,17 +86,18 @@ export const reducer = (
             images: state.images.reverse(),
         };
     }
-    if (action.type === ActionType.INCREASE_ZOOM) {
+    if (action.type === ActionType.SET_SCALE_VALUE) {
+        const { payload } = action;
         return {
             ...state,
-            zoomRatio: state.zoomRatio + 1,
+            scaleValue: payload.scaleValue,
         };
     }
     if (action.type === ActionType.RESET_IMAGES_SETTINGS) {
         return {
             ...state,
-            mode: 'sliderY',
-            zoomRatio: 1,
+            mode: Mode.SLIDER_Y,
+            scaleValue: '1',
         };
     }
     return state;

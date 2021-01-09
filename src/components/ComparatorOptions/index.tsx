@@ -1,16 +1,17 @@
-import React from 'react';
-import { Container } from './styles';
+import React, {ChangeEvent} from 'react';
+import {Container, Hr} from './styles';
 import {ActionType, useReducerContext} from "../../reducers/toolsReducer";
+import { Mode} from "../../types";
 
 const ComparatorOptions = () => {
-    const { dispatch } = useReducerContext();
+    const { dispatch, state: { mode , scaleValue } } = useReducerContext();
 
     const handleSliderY = () => {
-        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: 'sliderY' }})
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.SLIDER_Y }})
     }
 
     const handleSliderX= () => {
-        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: 'sliderX' }})
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.SLIDER_X }})
     }
 
     const handleResetImages = () => {
@@ -22,7 +23,7 @@ const ComparatorOptions = () => {
     }
 
     const handleZoom = () => {
-        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: 'zoom' } });
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.ZOOM } });
     }
 
     const handleResetSettings = () => {
@@ -30,7 +31,11 @@ const ComparatorOptions = () => {
     }
 
     const handleDrag = () => {
-        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: 'drag' } });
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.DRAG } });
+    }
+
+    const handleZoomChange = (event: ChangeEvent<HTMLInputElement>) => {
+        dispatch({ type: ActionType.SET_SCALE_VALUE, payload: { scaleValue: event.target.value } });
     }
 
     return (
@@ -42,6 +47,17 @@ const ComparatorOptions = () => {
             <button onClick={handleResetSettings}>Reset Settings</button>
             <button onClick={handleSwap}>handle swap</button>
             <button onClick={handleDrag}>handle drag</button>
+            <Hr />
+            {mode === Mode.ZOOM &&
+                <input
+                    onChange={handleZoomChange}
+                    type='range'
+                    step='1'
+                    min='1'
+                    max='8'
+                    value={scaleValue}
+                />
+            }
         </Container>
     );
 };

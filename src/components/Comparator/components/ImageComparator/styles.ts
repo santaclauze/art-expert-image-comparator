@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const ImagesContainer = styled.div`
   width: 75vw;
   height: 75vh;
-  border: 1px solid grey;
   position: relative;
-  background-color: #666666;
   display: flex;
   div#displayed-image-1, div#displayed-image-2 {
     width: 75vw;
@@ -13,7 +11,8 @@ export const ImagesContainer = styled.div`
     display:block;
     vertical-align:middle;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: contain;
+    background-position: center;
   }
 `;
 
@@ -24,6 +23,7 @@ export const ContainerCover = styled.div.attrs<{pos: number, isVertical: boolean
 }))`
   overflow: hidden;
   height: 100%;
+  width: 100%;
   position: absolute;
   z-index: 10;
 `;
