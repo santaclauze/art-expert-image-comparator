@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsAlt, faArrowsAltV, faArrowsAltH, faSearch, faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 
 const ComparatorOptions = () => {
-    const { dispatch, state: { mode , scaleValue, sliderStyles } } = useReducerContext();
+    const { dispatch, state } = useReducerContext();
 
     const handleSliderY = () => {
         dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.SLIDER_Y }})
@@ -50,12 +50,18 @@ const ComparatorOptions = () => {
         dispatch({ type: ActionType.SET_SLIDER_STYLES, payload: { sliderStyles: { width: event.target.value} } });
     }
 
+    const handleRepositionImage1 = () => {
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.REPOSITION } });
+
+    }
+
     return (
         <Container>
             <div>
                 <Heading>Actions</Heading>
                 <Button onClick={handleSliderY}><FontAwesomeIcon icon={faArrowsAltH} /></Button>
                 <Button onClick={handleSliderX}><FontAwesomeIcon icon={faArrowsAltV} /></Button>
+                <Button onClick={handleRepositionImage1}>Reposition Image 1</Button>
                 <Button onClick={handleZoom}><FontAwesomeIcon icon={faSearch} /></Button>
                 <Button onClick={handleSwap}><FontAwesomeIcon icon={faExchangeAlt} /></Button>
                 <Button onClick={handleDrag}><FontAwesomeIcon icon={faArrowsAlt} /></Button>
@@ -64,31 +70,32 @@ const ComparatorOptions = () => {
             </div>
             <div>
                 <Heading>Options</Heading>
-                {mode === Mode.ZOOM &&
+                {state.mode === Mode.ZOOM &&
                     <input
                         onChange={handleZoomChange}
                         type='range'
                         step='1'
                         min='1'
                         max='8'
-                        value={scaleValue}
+                        value={state.scaleValue}
                     />
                 }
-                {(mode === Mode.SLIDER_X || mode === Mode.SLIDER_Y) &&
+                {(state.mode === Mode.SLIDER_X || state.mode === Mode.SLIDER_Y) &&
                     <>
                         <input
                             onChange={handleSliderColor}
                             type='color'
-                            value={sliderStyles.color}
+                            value={state.sliderStyles.color}
                         />
                         <input
                             onChange={handleSliderWidth}
                             type='number'
-                            value={sliderStyles.width}
+                            value={state.sliderStyles.width}
                         />
                     </>
                 }
             </div>
+            <div style={{ color: 'white', overflowWrap: 'anywhere' }}>{JSON.stringify(state)}</div>
         </Container>
     );
 };

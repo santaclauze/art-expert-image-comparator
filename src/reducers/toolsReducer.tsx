@@ -9,6 +9,7 @@ export interface ToolsState {
     isReadyToCompare: boolean;
     scaleValue: string;
     backgroundPositions: { x: number, y: number };
+    repositionImage1: { x: number, y: number };
     cursorStyle: Cursors;
     sliderStyles: {
         width: string;
@@ -24,6 +25,7 @@ export enum ActionType {
     SET_SCALE_VALUE,
     RESET_IMAGES_SETTINGS,
     SET_BACKGROUND_POSITIONS,
+    SET_REPOSITION_IMAGE_1,
     SET_CURSOR_STYLE,
     SET_SLIDER_STYLES,
 }
@@ -61,6 +63,13 @@ interface SetBackgroundPositions {
     };
 }
 
+interface SetRepositionImage1 {
+    type: ActionType.SET_REPOSITION_IMAGE_1;
+    payload: {
+        repositionImage1: { x: number, y: number };
+    };
+}
+
 interface SetSliderStyles {
     type: ActionType.SET_SLIDER_STYLES;
     payload: {
@@ -80,7 +89,7 @@ interface ResetImageSettings {
 }
 
 
-type ToolsAction = SetSliderStyles | SetCursorStyle | SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
+type ToolsAction = SetRepositionImage1 | SetSliderStyles | SetCursorStyle | SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
 
 // initial state
 export const initialState: ToolsState = {
@@ -89,6 +98,7 @@ export const initialState: ToolsState = {
     isReadyToCompare: false,
     scaleValue: '1',
     backgroundPositions: { x: 0, y : 0 },
+    repositionImage1: { x: 0, y : 0 },
     cursorStyle: Cursors.DEFAULT,
     sliderStyles: {
         width: '1',
@@ -135,6 +145,13 @@ export const reducer = (
         return {
             ...state,
             backgroundPositions: payload.backgroundPositions,
+        };
+    }
+    if (action.type === ActionType.SET_REPOSITION_IMAGE_1) {
+        const { payload } = action;
+        return {
+            ...state,
+            repositionImage1: payload.repositionImage1,
         };
     }
     if (action.type === ActionType.SET_CURSOR_STYLE) {
