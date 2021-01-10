@@ -63,5 +63,5 @@ export const Slider = styled.div.attrs<{pos: number, isVertical: boolean, color:
   position: absolute;
   z-index: 100;
   /* @ts-ignore */
-  color: ${props => props.color};
+  background-color: ${props => props.color};
 `;

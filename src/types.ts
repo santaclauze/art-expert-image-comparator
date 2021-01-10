@@ -19,3 +19,12 @@ export enum Cursors {
     SLIDER_Y = 'col-resize',
     ZOOM = 'ZOOM',
 }
+
+export enum ArrowKeyCodes {
+    LEFT = 37,
+    UP = 38,
+    RIGHT = 39,
+    DOWN = 40,
+}
+
+export const ARROW_KEY_CODES = [ArrowKeyCodes.UP,ArrowKeyCodes.RIGHT,ArrowKeyCodes.DOWN,ArrowKeyCodes.LEFT];

@@ -59,12 +59,13 @@ const ComparatorOptions = () => {
         <Container>
             <div>
                 <Heading>Actions</Heading>
-                <Button onClick={handleSliderY}><FontAwesomeIcon icon={faArrowsAltH} /></Button>
-                <Button onClick={handleSliderX}><FontAwesomeIcon icon={faArrowsAltV} /></Button>
-                <Button onClick={handleRepositionImage1}>Reposition Image 1</Button>
-                <Button onClick={handleZoom}><FontAwesomeIcon icon={faSearch} /></Button>
+                <Button onClick={handleSliderY} active={state.mode === Mode.SLIDER_Y}><FontAwesomeIcon icon={faArrowsAltH} /></Button>
+                <Button onClick={handleSliderX} active={state.mode === Mode.SLIDER_X}><FontAwesomeIcon icon={faArrowsAltV} /></Button>
+                <Button onClick={handleRepositionImage1} active={state.mode === Mode.REPOSITION}>Reposition Image 1</Button>
+                <Button onClick={handleZoom} active={state.mode === Mode.ZOOM}><FontAwesomeIcon icon={faSearch} /></Button>
+                <Button onClick={handleDrag} active={state.mode === Mode.DRAG}><FontAwesomeIcon icon={faArrowsAlt} /></Button>
+                <hr />
                 <Button onClick={handleSwap}><FontAwesomeIcon icon={faExchangeAlt} /></Button>
-                <Button onClick={handleDrag}><FontAwesomeIcon icon={faArrowsAlt} /></Button>
                 <Button onClick={handleResetImages}>Clear</Button>
                 <Button onClick={handleResetSettings}>Reset Settings</Button>
             </div>

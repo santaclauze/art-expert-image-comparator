@@ -1,13 +1,11 @@
 // @ts-nocheck
 import React, {useEffect, useState} from 'react';
-import { useSlider } from 'react-use';
+import {useSlider} from 'react-use';
 
-import {
-    ContainerLower, ImagesContainer, ContainerCover, Slider,
-} from './styles';
+import {ContainerCover, ContainerLower, ImagesContainer, Slider,} from './styles';
 import ImageDisplayer from "./ImageDisplayer";
 import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
-import {Mode} from "../../../../types";
+import { Mode} from "../../../../types";
 
 const ImageComparator = () => {
     const { dispatch, state: { images, isReadyToCompare, mode, sliderStyles } } = useReducerContext();
