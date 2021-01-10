@@ -9,12 +9,11 @@ interface Props {
 }
 
 const ImageDisplayer = ({ previewUrl, index }: Props) => {
-    const { dispatch, state: { scaleValue, backgroundPositions, repositionImage1, mode } } = useReducerContext();
+    const { dispatch, state: { scaleValue, backgroundPositions, opacityValue, repositionImage1, mode } } = useReducerContext();
 
     const keyDownDrag = useCallback((event) => {
         if(!ARROW_KEY_CODES.includes(event.keyCode) || mode !== Mode.DRAG) return;
         if(event.keyCode === ArrowKeyCodes.UP) {
-            console.log('wtf?????????????????????')
             dispatch({
                 type: ActionType.SET_BACKGROUND_POSITIONS,
                 payload: { backgroundPositions: {
@@ -114,7 +113,8 @@ const ImageDisplayer = ({ previewUrl, index }: Props) => {
                 style={{
                     backgroundImage: `url(${previewUrl})`,
                     transform: `scale(${scaleValue})`,
-                    margin: `${positionX}px -1000px 0px ${positionY}px`
+                    margin: `${positionX}px -1000px 0px ${positionY}px`,
+                    opacity: `${index === 2 ? opacityValue : 1}`
                 }}
             />
         ) : <DropContainer><p>Drag and drop image here...</p></DropContainer>

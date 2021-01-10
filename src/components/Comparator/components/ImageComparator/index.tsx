@@ -8,7 +8,7 @@ import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
 import { Mode} from "../../../../types";
 
 const ImageComparator = () => {
-    const { dispatch, state: { images, isReadyToCompare, mode, sliderStyles } } = useReducerContext();
+    const { dispatch, state: { images, isReadyToCompare, mode, sliderStyles, isLocked } } = useReducerContext();
     const ref = React.useRef(null);
 
     const isVertical = mode === Mode.SLIDER_X;
@@ -16,7 +16,7 @@ const ImageComparator = () => {
     const { value } = useSlider(ref, { vertical: isVertical });
     const [savedSliderValue, setSavedSliderValue] = useState();
     const handleClick = () => {
-      if(mode !== 'zoom') {
+      if(mode !== Mode.ZOOM) {
           return;
       }
       dispatch({ type: ActionType.INCREASE_ZOOM });
@@ -29,7 +29,7 @@ const ImageComparator = () => {
     }, [mode, value])
 
     const makePosition = (defaultValue: number) => {
-      if (mode === 'zoom' || mode === 'drag') {
+      if (isLocked) {
           return savedSliderValue;
       }
       if (isReadyToCompare) {

@@ -6,6 +6,7 @@ export type FileHandler = HTMLInputEvent | File;
 
 export enum Mode {
     DRAG = 'DRAG',
+    OPACITY = 'OPACITY',
     REPOSITION = 'REPOSITION',
     SLIDER_X = 'SLIDER_X',
     SLIDER_Y = 'SLIDER_Y',

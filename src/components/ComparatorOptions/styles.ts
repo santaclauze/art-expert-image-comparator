@@ -3,9 +3,17 @@ import tw from "twin.macro";
 
 
 export const Container = styled.div`
-  ${tw`flex flex-row h-full ml-auto flex-wrap content-start`}
+  ${tw`flex flex-col h-full ml-auto flex-wrap content-start text-white`}
   width: 300px;
   background-color: #2f2f2f;
+`;
+
+export const ActionsGroup = styled.div`
+  ${tw`flex flex-row content-start flex-wrap`}
+`;
+
+export const OptionsGroup = styled.div`
+  ${tw`flex flex-row`}
 `;
 
 export const Button = styled.button<{ active?: boolean }>`

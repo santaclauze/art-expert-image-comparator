@@ -6,8 +6,10 @@ import {Cursors, Mode} from "../types";
 export interface ToolsState {
     mode: Mode;
     images: any[];
+    isLocked: boolean;
     isReadyToCompare: boolean;
     scaleValue: string;
+    opacityValue: string;
     backgroundPositions: { x: number, y: number };
     repositionImage1: { x: number, y: number };
     cursorStyle: Cursors;
@@ -28,6 +30,8 @@ export enum ActionType {
     SET_REPOSITION_IMAGE_1,
     SET_CURSOR_STYLE,
     SET_SLIDER_STYLES,
+    SET_OPACITY_VALUE,
+    TOGGLE_LOCK,
 }
 
 // action type
@@ -53,6 +57,20 @@ interface SetScaleValueAction {
     type: ActionType.SET_SCALE_VALUE;
     payload: {
         scaleValue: string;
+    };
+}
+
+interface SetOpacityValueAction {
+    type: ActionType.SET_OPACITY_VALUE;
+    payload: {
+        opacityValue: string;
+    };
+}
+
+interface ToggleLockAction {
+    type: ActionType.TOGGLE_LOCK;
+    payload: {
+        isLocked: boolean;
     };
 }
 
@@ -89,7 +107,7 @@ interface ResetImageSettings {
 }
 
 
-type ToolsAction = SetRepositionImage1 | SetSliderStyles | SetCursorStyle | SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
+type ToolsAction = ToggleLockAction | SetOpacityValueAction | SetRepositionImage1 | SetSliderStyles | SetCursorStyle | SetBackgroundPositions | SetScaleValueAction | IUpdateModeAction | ResetImageSettings | ISwapImagesAction | IUploadImagesAction;
 
 // initial state
 export const initialState: ToolsState = {
@@ -97,6 +115,8 @@ export const initialState: ToolsState = {
     images: [],
     isReadyToCompare: false,
     scaleValue: '1',
+    opacityValue: '1',
+    isLocked: false,
     backgroundPositions: { x: 0, y : 0 },
     repositionImage1: { x: 0, y : 0 },
     cursorStyle: Cursors.DEFAULT,
@@ -140,6 +160,20 @@ export const reducer = (
             scaleValue: payload.scaleValue,
         };
     }
+    if (action.type === ActionType.SET_OPACITY_VALUE) {
+        const { payload } = action;
+        return {
+            ...state,
+            opacityValue: payload.opacityValue,
+        };
+    }
+    if (action.type === ActionType.TOGGLE_LOCK) {
+        const { payload } = action;
+        return {
+            ...state,
+            isLocked: payload.isLocked,
+        };
+    }
     if (action.type === ActionType.SET_BACKGROUND_POSITIONS) {
         const { payload } = action;
         return {
@@ -176,6 +210,7 @@ export const reducer = (
             ...state,
             mode: Mode.SLIDER_Y,
             scaleValue: '1',
+            opacityValue: '1',
             cursorStyle: Cursors.DEFAULT,
             backgroundPositions: { x: 0, y : 0 },
             repositionImage1: { x: 0, y : 0 },

@@ -1,9 +1,10 @@
 import React, {ChangeEvent} from 'react';
-import { Button, Container, Heading } from './styles';
+import { Button, Container, Heading, ActionsGroup } from './styles';
 import {ActionType, useReducerContext} from "../../reducers/toolsReducer";
 import { Cursors, Mode } from "../../types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowsAlt, faArrowsAltV, faArrowsAltH, faSearch, faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
+import { faArrowsAlt, faArrowsAltV, faArrowsAltH, faSearch, faExchangeAlt, faAdjust, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
+import {makeHints} from "./helpers";
 
 const ComparatorOptions = () => {
     const { dispatch, state } = useReducerContext();
@@ -52,26 +53,44 @@ const ComparatorOptions = () => {
 
     const handleRepositionImage1 = () => {
         dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.REPOSITION } });
+    }
 
+    const handleOpacity = () => {
+        dispatch({ type: ActionType.UPDATE_MODE, payload: { mode: Mode.OPACITY } });
+    }
+
+    const handleOpacityChange = (event: ChangeEvent<HTMLInputElement>) => {
+        dispatch({ type: ActionType.SET_OPACITY_VALUE, payload: { opacityValue: event.target.value } });
+    }
+
+    const handleLock = () => {
+        dispatch({ type: ActionType.TOGGLE_LOCK, payload: { isLocked: !state.isLocked } });
     }
 
     return (
         <Container>
             <div>
                 <Heading>Actions</Heading>
-                <Button onClick={handleSliderY} active={state.mode === Mode.SLIDER_Y}><FontAwesomeIcon icon={faArrowsAltH} /></Button>
-                <Button onClick={handleSliderX} active={state.mode === Mode.SLIDER_X}><FontAwesomeIcon icon={faArrowsAltV} /></Button>
-                <Button onClick={handleRepositionImage1} active={state.mode === Mode.REPOSITION}>Reposition Image 1</Button>
-                <Button onClick={handleZoom} active={state.mode === Mode.ZOOM}><FontAwesomeIcon icon={faSearch} /></Button>
-                <Button onClick={handleDrag} active={state.mode === Mode.DRAG}><FontAwesomeIcon icon={faArrowsAlt} /></Button>
+                <ActionsGroup>
+                    <Button onClick={handleSliderY} title="Y axis slider" active={state.mode === Mode.SLIDER_Y}><FontAwesomeIcon icon={faArrowsAltH} /></Button>
+                    <Button onClick={handleSliderX} title="X axis slider" active={state.mode === Mode.SLIDER_X}><FontAwesomeIcon icon={faArrowsAltV} /></Button>
+                    <Button onClick={handleLock} title={state.isLocked ? 'Unlocks slider' : 'Lock slider'} active={state.isLocked}><FontAwesomeIcon icon={state.isLocked ? faLock : faLockOpen} /></Button>
+                    <Button onClick={handleRepositionImage1} title="Reposition right Image" active={state.mode === Mode.REPOSITION}>Reposition Right Image</Button>
+                    <Button onClick={handleZoom} title="Enable zoom options" active={state.mode === Mode.ZOOM}><FontAwesomeIcon icon={faSearch} /></Button>
+                    <Button onClick={handleOpacity} title="Enable opacity options" active={state.mode === Mode.OPACITY}><FontAwesomeIcon icon={faAdjust} /></Button>
+                    <Button onClick={handleDrag} title="Move both images" active={state.mode === Mode.DRAG}><FontAwesomeIcon icon={faArrowsAlt} /></Button>
+                </ActionsGroup>
                 <hr />
-                <Button onClick={handleSwap}><FontAwesomeIcon icon={faExchangeAlt} /></Button>
-                <Button onClick={handleResetImages}>Clear</Button>
-                <Button onClick={handleResetSettings}>Reset Settings</Button>
+                <ActionsGroup>
+                    <Button onClick={handleSwap} title="Swap both images"><FontAwesomeIcon icon={faExchangeAlt} /></Button>
+                    <Button onClick={handleResetImages} title="Clear images and upload new ones">Clear</Button>
+                    <Button onClick={handleResetSettings} title="Reset settings">Reset Settings</Button>
+                </ActionsGroup>
             </div>
             <div>
                 <Heading>Options</Heading>
-                {state.mode === Mode.ZOOM &&
+                <>
+                    {state.mode === Mode.ZOOM &&
                     <input
                         onChange={handleZoomChange}
                         type='range'
@@ -80,23 +99,40 @@ const ComparatorOptions = () => {
                         max='8'
                         value={state.scaleValue}
                     />
-                }
-                {(state.mode === Mode.SLIDER_X || state.mode === Mode.SLIDER_Y) &&
+                    }
+                    {state.mode === Mode.OPACITY &&
+                    <input
+                        onChange={handleOpacityChange}
+                        type='range'
+                        step='0.1'
+                        min='0'
+                        max='1'
+                        value={state.opacityValue}
+                    />
+                    }
+                    {(state.mode === Mode.SLIDER_X || state.mode === Mode.SLIDER_Y) &&
                     <>
+                        <>
                         <input
                             onChange={handleSliderColor}
                             type='color'
                             value={state.sliderStyles.color}
                         />
+                        </>
                         <input
                             onChange={handleSliderWidth}
                             type='number'
                             value={state.sliderStyles.width}
                         />
                     </>
-                }
+                    }
+                </>
             </div>
-            <div style={{ color: 'white', overflowWrap: 'anywhere' }}>{JSON.stringify(state)}</div>
+            <div>
+                <Heading>Hints</Heading>
+                {makeHints(state.mode)}
+            </div>
+            {/*<div style={{ color: 'white', overflowWrap: 'anywhere' }}>{JSON.stringify(state)}</div>*/}
         </Container>
     );
 };
