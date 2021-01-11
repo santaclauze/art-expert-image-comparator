@@ -8,7 +8,7 @@ import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
 import { Mode} from "../../../../types";
 
 const ImageComparator = () => {
-    const { dispatch, state: { images, isReadyToCompare, mode, sliderStyles, isLocked } } = useReducerContext();
+    const { dispatch, state: { images, isReadyToCompare, mode, isSliderVisible, isLocked } } = useReducerContext();
     const ref = React.useRef(null);
 
     const isVertical = mode === Mode.SLIDER_X;
@@ -48,8 +48,7 @@ const ImageComparator = () => {
         <Slider
             pos={makePosition(0.5)}
             isVertical={isVertical}
-            color={sliderStyles.color}
-            width={sliderStyles.width}
+            isSliderVisible={isSliderVisible}
         />
         <ContainerCover
             pos={makePosition(1)}

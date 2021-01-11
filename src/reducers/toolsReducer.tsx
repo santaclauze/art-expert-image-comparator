@@ -13,10 +13,7 @@ export interface ToolsState {
     backgroundPositions: { x: number, y: number };
     repositionImage1: { x: number, y: number };
     cursorStyle: Cursors;
-    sliderStyles: {
-        width: string;
-        color: string;
-    }
+    isSliderVisible: boolean;
 }
 
 // action types
@@ -91,7 +88,7 @@ interface SetRepositionImage1 {
 interface SetSliderStyles {
     type: ActionType.SET_SLIDER_STYLES;
     payload: {
-        sliderStyles: { width?: string, color?: string };
+        isSliderVisible: boolean;
     };
 }
 
@@ -120,10 +117,7 @@ export const initialState: ToolsState = {
     backgroundPositions: { x: 0, y : 0 },
     repositionImage1: { x: 0, y : 0 },
     cursorStyle: Cursors.DEFAULT,
-    sliderStyles: {
-        width: '1',
-        color: 'black',
-    }
+    isSliderVisible: true,
 };
 
 // reducer
@@ -199,10 +193,7 @@ export const reducer = (
         const { payload } = action;
         return {
             ...state,
-            sliderStyles: {
-                ...state.sliderStyles,
-                ...payload.sliderStyles
-            },
+            isSliderVisible: payload.isSliderVisible,
         };
     }
     if (action.type === ActionType.RESET_IMAGES_SETTINGS) {

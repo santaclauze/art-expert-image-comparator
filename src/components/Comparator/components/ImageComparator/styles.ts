@@ -45,23 +45,23 @@ export const DropContainer = styled.div`
   justify-content: center;
 `;
 
-export const Slider = styled.div.attrs<{pos: number, isVertical: boolean, color: string; width: string }>(props => ({
+export const Slider = styled.div.attrs<{pos: number, isVertical: boolean, isSliderVisible: boolean }>(props => ({
     style: {
         ...props.isVertical ? {
             top: `${props.pos * 100}%`,
             width: '100%',
             left: 0,
-            height: `${props.width}px`,
+            height: `${props.isSliderVisible ? 1 : 0}px`,
         } : {
             left: `${props.pos * 100}%`,
             height: '100%',
             top: 0,
-            width: `${props.width}px`,
+            width: `${props.isSliderVisible ? 1 : 0}px`,
         },
     },
 }))`
   position: absolute;
   z-index: 100;
   /* @ts-ignore */
-  background-color: ${props => props.color};
+  background-color: #191919;
 `;

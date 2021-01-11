@@ -5,6 +5,8 @@ import { Cursors, Mode } from "../../types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsAlt, faArrowsAltV, faArrowsAltH, faSearch, faExchangeAlt, faAdjust, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
 import {makeHints} from "./helpers";
+import ToggleInput from "../../ui/ToggleInput";
+import OverviewImage from "./components/OverviewImage";
 
 const ComparatorOptions = () => {
     const { dispatch, state } = useReducerContext();
@@ -43,12 +45,8 @@ const ComparatorOptions = () => {
         dispatch({ type: ActionType.SET_SCALE_VALUE, payload: { scaleValue: event.target.value } });
     }
 
-    const handleSliderColor = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch({ type: ActionType.SET_SLIDER_STYLES, payload: { sliderStyles: { color: event.target.value} } });
-    }
-
-    const handleSliderWidth = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch({ type: ActionType.SET_SLIDER_STYLES, payload: { sliderStyles: { width: event.target.value} } });
+    const handleSliderToggle = (arg: boolean) => {
+        dispatch({ type: ActionType.SET_SLIDER_STYLES, payload: { isSliderVisible: arg } });
     }
 
     const handleRepositionImage1 = () => {
@@ -112,18 +110,7 @@ const ComparatorOptions = () => {
                     }
                     {(state.mode === Mode.SLIDER_X || state.mode === Mode.SLIDER_Y) &&
                     <>
-                        <>
-                        <input
-                            onChange={handleSliderColor}
-                            type='color'
-                            value={state.sliderStyles.color}
-                        />
-                        </>
-                        <input
-                            onChange={handleSliderWidth}
-                            type='number'
-                            value={state.sliderStyles.width}
-                        />
+                        <ToggleInput handleToggle={handleSliderToggle} isToggled={state.isSliderVisible} />
                     </>
                     }
                 </>
@@ -131,6 +118,10 @@ const ComparatorOptions = () => {
             <div>
                 <Heading>Hints</Heading>
                 {makeHints(state.mode)}
+            </div>
+            <div>
+                <Heading>Overview</Heading>
+                <OverviewImage />
             </div>
             {/*<div style={{ color: 'white', overflowWrap: 'anywhere' }}>{JSON.stringify(state)}</div>*/}
         </Container>

@@ -12,9 +12,6 @@ export const ActionsGroup = styled.div`
   ${tw`flex flex-row content-start flex-wrap`}
 `;
 
-export const OptionsGroup = styled.div`
-  ${tw`flex flex-row`}
-`;
 
 export const Button = styled.button<{ active?: boolean }>`
   width: fit-content;
