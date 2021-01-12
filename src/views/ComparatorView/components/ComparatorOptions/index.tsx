@@ -1,11 +1,11 @@
 import React, {ChangeEvent} from 'react';
 import { Button, Container, Heading, ActionsGroup } from './styles';
-import {ActionType, useReducerContext} from "../../reducers/toolsReducer";
-import { Cursors, Mode } from "../../types";
+import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
+import { Cursors, Mode } from "../../../../types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsAlt, faArrowsAltV, faArrowsAltH, faSearch, faExchangeAlt, faAdjust, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
 import {makeHints} from "./helpers";
-import ToggleInput from "../../ui/ToggleInput";
+import ToggleInput from "../../../../ui/ToggleInput";
 import OverviewImage from "./components/OverviewImage";
 
 const ComparatorOptions = () => {

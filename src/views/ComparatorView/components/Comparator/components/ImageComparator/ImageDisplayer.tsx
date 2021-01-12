@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import { DropContainer } from './styles';
-import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
-import {ARROW_KEY_CODES, ArrowKeyCodes, Mode} from "../../../../types";
+import {ActionType, useReducerContext} from "../../../../../../reducers/toolsReducer";
+import {ARROW_KEY_CODES, ArrowKeyCodes, Mode} from "../../../../../../types";
 
 interface Props {
     previewUrl: string;

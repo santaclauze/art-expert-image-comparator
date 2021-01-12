@@ -5,7 +5,7 @@ import {
 } from './styles';
 import Uploader from "./components/Uploader";
 import ImageComparator from "./components/ImageComparator";
-import {useReducerContext} from "../../reducers/toolsReducer";
+import {useReducerContext} from "../../../../reducers/toolsReducer";
 
 const Comparator = () => {
     const { state: { isReadyToCompare, cursorStyle } } = useReducerContext();

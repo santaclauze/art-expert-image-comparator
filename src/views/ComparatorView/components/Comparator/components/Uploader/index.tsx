@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container} from './styles';
-import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
+import {ActionType, useReducerContext} from "../../../../../../reducers/toolsReducer";
 
 const Uploader = () => {
     const { dispatch } = useReducerContext();

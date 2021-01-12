@@ -4,8 +4,8 @@ import {useSlider} from 'react-use';
 
 import {ContainerCover, ContainerLower, ImagesContainer, Slider,} from './styles';
 import ImageDisplayer from "./ImageDisplayer";
-import {ActionType, useReducerContext} from "../../../../reducers/toolsReducer";
-import { Mode} from "../../../../types";
+import {ActionType, useReducerContext} from "../../../../../../reducers/toolsReducer";
+import { Mode} from "../../../../../../types";
 
 const ImageComparator = () => {
     const { dispatch, state: { images, isReadyToCompare, mode, isSliderVisible, isLocked } } = useReducerContext();

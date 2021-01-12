@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Container } from './styles';
+import LoginForm from "./components/LoginForm";
 
 const LoginView = () => {
     return (
-        <div>
-            Login
-            <Link to={'/comparator'}>Go to comparator</Link>
-        </div>
+        <Container>
+            <LoginForm />
+        </Container>
     );
 };
 
